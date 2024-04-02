@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.h_w{
+    height: 400px;
+    width: 800px;
+}
+.width{
+    width: 700px !important;
+}
+
+.checkbox{
+    width: 20px;
+    height: 20px;
+}
+.active{
+    color: white;
+    padding:10px 11px;
+    /* font-size:; */
+}
+.nav{
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: gray;
+}
+.small{
+    font-size: 8px !important;
+}
+
+
+.h2{
+    font-weight: 700;
+    font-size: 18px;
+}
+@media (max-width:426px) {
+    .h2{
+        font-size: 14px;
+    }
+}
+
+/* @media (max-width:426px) {
+    .width{
+        width: 400px;
+    }
+} */
+
+
+
+@media (max-width:321px) {
+    .h2{
+        font-size: 10px;
+    }
+}
+
+@media (max-width:426px) {
+    .nav{
+        padding: 0px 10px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: gray;
+    }
+    .active{
+        font-size: 12px;
+    }
+}
+
+@media (max-width:376px) {
+    .nav{
+        padding: 0px 8px;
+        font-size: 10px;
+    }
+
+}
+
+@media (max-width:321px) {
+    .nav{
+        padding: 0px 6px;
+        font-size: 10px;
+    }
+
+}
+@media (max-width:769px) {
+    .h_w{
+        height: 400px;
+        width: 400px;
+    }
+}
+@media (max-width:376px) {
+    .h_w{
+        height: 400px;
+        width: 300px;
+    }
+}
