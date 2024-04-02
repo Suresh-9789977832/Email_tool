@@ -24,7 +24,7 @@ app.use('/post', postrouter)
     
 
 
-mongoose.connect(`${process.env.DB_URL}/${process.env.DB_name}`)
+mongoose.connect(`${process.env.DB_URL}/${process.env.DB_NAME}`)
 
 app.get('/', (req, res) => { 
     res.json("Hello welcome to the world of nodejs")
