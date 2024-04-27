@@ -1,14 +1,6 @@
 const mongoose = require("mongoose")
 
 const scheduleschema = new mongoose.Schema({
-    end: {
-        type: Date,
-        required:true
-    },
-    start: {
-        type: Date,
-        required:true
-    },
     title: {
         type: String,
         required:true

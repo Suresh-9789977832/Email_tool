@@ -78,12 +78,12 @@ const manualEmail = async(req,res) => {
 
 const postexcelfile = async(req,res) => {
     try {
-        const quillcontent = req.body.quillcontent
+        const content = req.body.content
         const subject = req.body.subject
         const final = req.body.final
         const token=req.params.token
 
-        if (quillcontent && subject && final) {
+        if (content && subject && final) {
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
@@ -96,7 +96,7 @@ const postexcelfile = async(req,res) => {
                   from: `${process.env.USER} <${process.env.USER}>`,
                   to:final,
                   subject:subject,
-                  text: quillcontent,
+                  text: content,
             };
             
             transporter.sendMail(mailoption,  async(error, info)=>{
@@ -111,7 +111,7 @@ const postexcelfile = async(req,res) => {
                                 })
                             }
                             else {
-                                await Postmodal.create({ subject,htmltemplate:quillcontent,receiver:final,userid:data.id})
+                                await Postmodal.create({ subject,htmltemplate:content,receiver:final,userid:data.id})
                             }
                       })
                     }
@@ -143,8 +143,6 @@ const postexcelfile = async(req,res) => {
  const scheduleemail = async(req,res) => {
    try {
      let subject = req.body.newEvent.subject
-     let start = req.body.newEvent.start
-     let end = req.body.newEvent.end
      let minute = req.body.newEvent.minute
      let hour = req.body.newEvent.hour
      let day = req.body.newEvent.day
@@ -152,53 +150,56 @@ const postexcelfile = async(req,res) => {
      let receiver = req.body.newEvent.receiver
      let content = req.body.newEvent.content
 
-    //  if (start && end && minute && subject && content && receiver && month && day && hour) {
-       await schedulemodal.create({ start, end, minute, title: subject, content, receiver, month, day, hour })
-       let datas = await schedulemodal.find()
-       datas.forEach(data => {
-         cron.schedule(
-           `${data.minute} ${data.hour} ${data.day} ${data.month} *`,
-           () => {
-             sendEmail(data);
-           },
-           {
-             scheduled: true,
-             timezone: "Asia/Kolkata"
-           }
-         );
-       });
-              
-       function sendEmail(data) {
-         let transporter = nodemailer.createTransport({
-           service: 'Gmail',
-           auth: {
-             user: process.env.USER,
-             pass: process.env.PASS
-           },
-         });
-              
-         let mailOptions = {
-           from: `${process.env.USER} <${process.env.USER}>`,
-           to: data.receiver,
-           subject: subject,
-           text: data.content,
-         };
-              
-         transporter.sendMail(mailOptions, (error, info) => {
-           if (error) {
-             console.log('Error sending email:', error);
-           } else {
-             console.log('Email sent:', info.response);
-           }
-         });
-       }
-              
-       res.json(datas)
-    //  }
-   
-        // else {
-        //     res.status(400).json('fill all the field')
-        // }
+     if (minute && subject && content && receiver && month && day && hour) {
+      await schedulemodal.create({ minute, title: subject, content, receiver, month, day, hour })
+      let datas = await schedulemodal.find()
+      datas.forEach(data => {
+        cron.schedule(
+          `${data.minute} ${data.hour} ${data.day} ${data.month} *`,
+          () => {
+            sendEmail(data);
+          },
+          {
+            scheduled: true,
+            timezone: "Asia/Kolkata"
+          }
+        );
+      });
+             
+      function sendEmail(data) {
+        let transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: process.env.USER,
+            pass: process.env.PASS
+          },
+        });
+             
+        let mailOptions = {
+          from: `${process.env.USER} <${process.env.USER}>`,
+          to: data.receiver,
+          subject: subject,
+          text: data.content,
+        };
+             
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log('Error sending email:', error);
+          } else {
+            console.log('Email sent:', info.response);
+          }
+        });
+      }
+             
+      res.json(datas)
+     }
+     else {
+       res.status(400).send({
+         message:"Fill all the field"
+       })
+     }
+     
+    
     } 
     catch (error) {
         res.status(500).send({
