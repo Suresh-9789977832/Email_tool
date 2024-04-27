@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router"
+import { Route, Router, Routes, } from "react-router"
 import Login from "./Pages/Login"
 import Navbar from "./Pages/Navbar"
 import Signup from "./Pages/Signup"
@@ -16,6 +16,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 function App() {
  
   return <>
+    <div>
     <Navbar />
     <Toaster/>
     <Routes>
@@ -27,7 +28,8 @@ function App() {
       <Route path="/setting" element={<Settings />} />
       <Route path="/senditem" element={<Senditems/>} />
       <Route path="*" element={<Login/>} />
-    </Routes>
+      </Routes>
+      </div>
   </>
 }
 

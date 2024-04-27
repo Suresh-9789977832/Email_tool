@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { MyComponent } from '../Components/Composequill'
 import Loader from '../Components/Loader'
 import { Bulkemailquill } from '../Components/Bulkquill'
 import toast from 'react-hot-toast'
@@ -116,8 +115,6 @@ function Bulkemail() {
         </div>
         <div>
         <button className='mt-20 my-8 flex justify-center bg-blue-500 text-white rounded-xl mx-80 h-8 items-center cursor-pointer p-5 text-lg max-3llg:mx-40 max-3md:mx-20 max-3mdd:my-28 max-3mdd:mx-10 max-3sm:my-32 max-3ssm:my-44' onClick={error.length>0?handlefile:""}>{loader?<Loader/>:"Send"}</button>
-
-
     </div>
   </>
 }

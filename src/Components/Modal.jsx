@@ -20,10 +20,12 @@ const style = {
 };
 
 export default function BasicModal() {
-    const {setShow,show,final}=React.useContext(Usercontext)
   const handleClose = () => setShow(false);
 
-  return (
+  const {setShow,show,final}=React.useContext(Usercontext)
+
+
+  return (  
     <div>
       <Modal
         open={show}

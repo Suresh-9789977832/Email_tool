@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { MyComponent } from '../Components/Composequill'
 import axios from 'axios'
 import { env } from '../Components/Env'
 import { Usercontext } from '../Context/Context'
@@ -25,17 +24,20 @@ function Compose() {
 
     const handlesend =async () => {
         try {
+            console.log('helo')
             setloader(true)
             let res = await axios.post(`${env.api_url}/post/email/${token}`, { receiver, subject, htmltemplate })
+            console.log(res)
             if (res.status === 200) {
                 setloader(false)
                 setreceiver('')
-                setsubject(null)
+                setsubject(" ")
                 sethtmltemplate(" ")
                 toast.success(res.data.message)
             }
             
         } catch (error) {
+            console.log(error)
             if (error.response.status == 400) {
                 setloader(false)
                 toast.error(error.response.data)
@@ -66,24 +68,24 @@ function Compose() {
         <h1 className='text-4xl font-semibold border-b-2 border-black max-3mdd:text-2xl'>Compose</h1>
             <div className='flex flex-col gap-2 mt-5'>
                 <lable>Recepiant</lable>
-                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3' onChange={handlechange}/>
+                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3' onChange={handlechange} value={receiver}/>
                 <p className='text-gray-500 text-sm'>Enter email address above seperated by comma <span className='ml-2 font-bold'>Eg:</span>&nbsp;yyyy@gmail.com,xxxx@gmail.com</p>
             </div>
             <div className='flex flex-col gap-2 mt-5'>
                 <lable>Subject</lable>
-                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3' onChange={(e)=>setsubject(e.target.value)}/>
+                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3' onChange={(e)=>setsubject(e.target.value)} value={subject}/>
             </div>
             <div className='flex flex-col gap-2 mt-5'>
 
                 <lable>Content</lable>
-                <div><MyComponent sethtmltemplate={sethtmltemplate} htmltemplate={htmltemplate} /></div>
+                <textarea className='border h-60 outline-none pl-3 rounded-md' type='text' onChange={(e)=>sethtmltemplate(e.target.value)} value={htmltemplate}/>
+                <button className='my-10 flex bg-blue-500 justify-center h-8 items-center text-white rounded-xl' onClick={handlesend}>{loader?<Loader/>:"Send"}</button>
+                {/* <div><MyComponent sethtmltemplate={sethtmltemplate} htmltemplate={htmltemplate} /></div> */}
+                {/* <button className='mt-20 flex justify-center bg-blue-500 text-white rounded-xl mx-80 h-8 items-center cursor-pointer text-lg' onClick={handlesend}>{loader?<Loader/>:"Send"}</button> */}
             </div>
         </div>
-        <div>
-        <button className='mt-20 my-8 flex justify-center bg-blue-500 text-white rounded-xl mx-80 h-8 items-center cursor-pointer p-6 text-lg max-3llg:mx-40 max-3md:mx-20 max-3mdd:my-28 max-3mdd:mx-10 max-3sm:my-32 max-3ssm:my-44' onClick={handlesend}>{loader?<Loader/>:"Send"}</button>
-
-
-    </div>
+        {/* <div>
+    </div> */}
     </>
 }
 
