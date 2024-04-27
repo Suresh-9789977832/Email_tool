@@ -82,8 +82,8 @@ function Schedule() {
     return <>
 
         <div className='flex  my-10 mx-14 max-3mdd:mx-10 max-3sm:mx-6 max-3ssm:mx-2'>
-            <button className={`bg-red-700 w-[200px] h-10 border text-white shadow-2xl max-3sm:text-sm max-3sm:w-[150px] ${flag?"":"border-4 border-red-500 rounded-md"}`} onClick={()=>setflag(false)}>Scheduled Email</button>
-            <button className={` bg-green-700 w-[200px] h-10 border text-white shadow-2xl max-3sm:text-sm max-3sm:w-[150px] ${flag?"border-4 border-green-500 rounded-md":""}`}  onClick={()=>setflag(true)}>Scheduled EmailTable</button>
+            <button className={`bg-red-500 w-[200px] h-10 border text-white shadow-2xl max-3sm:text-sm max-3sm:w-[150px] ${flag?"":"border-2 border-red-700 rounded-md"}`} onClick={()=>setflag(false)}>Scheduled Email</button>
+            <button className={` bg-green-500 w-[200px] h-10 border text-white shadow-2xl max-3sm:text-sm max-3sm:w-[150px] ${flag?"border-2 border-green-700 rounded-md":""}`}  onClick={()=>setflag(true)}>Scheduled EmailTable</button>
         </div>
 
         {
