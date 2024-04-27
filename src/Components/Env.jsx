@@ -1,3 +1,3 @@
 export const env = {
-    api_url:"https://email-tool-qyu1.onrender.com"
+    api_url:"http://localhost:3000"
 }

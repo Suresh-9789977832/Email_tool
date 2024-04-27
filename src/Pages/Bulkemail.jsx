@@ -1,22 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Loader from '../Components/Loader'
-import { Bulkemailquill } from '../Components/Bulkquill'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { env } from '../Components/Env'
 import { ExcelRenderer } from "react-excel-renderer";
 import { Usercontext } from '../Context/Context'
-import Example from '../Components/Modal'
 import BasicModal from '../Components/Modal'
 
 
 function Bulkemail() {
 
   const [loader, setloader] = useState('')
-  const [quillcontent, setquillcontent] = useState('')
+  const [content,setcontent]=useState('')
   const [subject,setsubject]=useState('')
   const [error, seterror] = useState(false)
-  const [formdata, setformdata] = useState(null)
   const token = localStorage.getItem('token')
   const { setShow, show,setfinal,final } = useContext(Usercontext)
   
@@ -37,7 +34,8 @@ function Bulkemail() {
             let val = res.rows.map((e) => e[0])
             var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
             let firstfilter = val.filter(e => e.match(mailformat))
-            let secontfilter=firstfilter.filter((e,i)=>firstfilter.indexOf(e)==i)
+            let secontfilter = firstfilter.filter((e, i) => firstfilter.indexOf(e) == i)
+            console.log(secontfilter)
           setfinal(secontfilter)
           }
         });
@@ -60,11 +58,11 @@ function Bulkemail() {
   const handlefile = async() => {
     try {
       setloader(true)
-      let res = await axios.post(`${env.api_url}/post/postfile/${token}`, { quillcontent, subject, final })
+      let res = await axios.post(`${env.api_url}/post/postfile/${token}`, { content, subject, final })
       if (res.status === 200) {
         setloader(false)
-        setsubject(null)
-        setquillcontent(null)
+        setsubject(" ")
+        setcontent(" ")
         toast.success(res.data.message)
         console.log(res.data)
     }
@@ -93,7 +91,7 @@ function Bulkemail() {
   
   return <>
     <BasicModal/>
-            <div className='mx-80  mt-20 overflow-visible max-3llg:mx-40  max-3md:mx-20 max-3mdd:mx-10 max-3mdd:mt-10'>
+            <div className='mx-80  mt-20 overflow-visible max-3llg:mx-40  max-3md:mx-20 max-3mdd:mx-10 max-3mdd:mt-10 max-3sm:mx-3'>
         <h1 className='text-4xl font-semibold border-b-2 border-black max-3mdd:text-2xl'>BulkEmail</h1>
             <div className='flex flex-col gap-2 mt-5'>
                 <lable>Recepiant</lable>
@@ -105,16 +103,16 @@ function Bulkemail() {
             </div>
             <div className='flex flex-col gap-2 mt-5'>
                 <lable>Subject</lable>
-                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3'onChange={handlesubject} id='subject'/>
+                <input type='text' className='w-full outline-none border h-8 rounded-md pl-3'onChange={handlesubject} id='subject' value={subject}/>
             </div>
             <div className='flex flex-col gap-2 mt-5'>
 
                 <lable>Content</lable>
-        <div><Bulkemailquill setquillcontent={setquillcontent} quillcontent={quillcontent}/></div>
+        <textarea className='border h-60 outline-none pl-3 rounded-md' onChange={(e)=>setcontent(e.target.value)} value={content}/>
+        <button className='my-10 flex bg-blue-500 justify-center h-8 items-center text-white rounded-xl' onClick={error.length>0?handlefile:""}>{loader?<Loader/>:"Send"}</button>
             </div>
         </div>
         <div>
-        <button className='mt-20 my-8 flex justify-center bg-blue-500 text-white rounded-xl mx-80 h-8 items-center cursor-pointer p-5 text-lg max-3llg:mx-40 max-3md:mx-20 max-3mdd:my-28 max-3mdd:mx-10 max-3sm:my-32 max-3ssm:my-44' onClick={error.length>0?handlefile:""}>{loader?<Loader/>:"Send"}</button>
     </div>
   </>
 }

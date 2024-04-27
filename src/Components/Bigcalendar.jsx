@@ -2,15 +2,12 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import { useContext, useState } from 'react'
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import { env } from './Env';
 import { useEffect } from 'react';
 import BasicDateTimePicker from './Timepicker';
 import { Usercontext } from '../Context/Context';
-import { Bulkemailquill } from './Bulkquill';
 import { ExcelRenderer } from "react-excel-renderer";
 import BasicModal from './Modal';
 import toast from 'react-hot-toast';
@@ -22,8 +19,6 @@ export const MyCalendar=()=>{
   const [events, setevents] = useState([])
   const [showmodal, setshowmodal] = useState(false)
   const [selectDate, setselectDate] = useState(null)
-  const [eventTitle, seteventTitle] = useState('');
-  // const [loader, setloader] = useState('')
   const [quillcontent, setquillcontent] = useState('')
   const [subject,setsubject]=useState('')
   const [error, seterror] = useState(false)

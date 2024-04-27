@@ -31,6 +31,10 @@
     font-size: 8px !important;
 }
 
+.tabledata{
+    /* width: 20px !important; */
+}
+
 
 .h2{
     font-weight: 700;
@@ -42,11 +46,6 @@
     }
 }
 
-/* @media (max-width:426px) {
-    .width{
-        width: 400px;
-    }
-} */
 
 
 

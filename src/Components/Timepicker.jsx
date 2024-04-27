@@ -13,7 +13,7 @@ export default function BasicDateTimePicker() {
         data.minute = (e.minute())
         data.hour = (e.hour())
         data.month = (e.month()+1)
-        data.days = (e.date())
+      data.days = (e.date())
         setgetdatetime({...data})
     }
 

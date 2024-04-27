@@ -64,7 +64,7 @@ function Compose() {
 
 
     return <>
-        <div className='mx-80  mt-20 overflow-visible max-3llg:mx-40  max-3md:mx-20 max-3mdd:mx-10 max-3mdd:mt-10'>
+        <div className='mx-80  mt-20 overflow-visible max-3llg:mx-40  max-3md:mx-20 max-3mdd:mx-10 max-3mdd:mt-10 max-3sm:mx-3'>
         <h1 className='text-4xl font-semibold border-b-2 border-black max-3mdd:text-2xl'>Compose</h1>
             <div className='flex flex-col gap-2 mt-5'>
                 <lable>Recepiant</lable>
@@ -80,12 +80,9 @@ function Compose() {
                 <lable>Content</lable>
                 <textarea className='border h-60 outline-none pl-3 rounded-md' type='text' onChange={(e)=>sethtmltemplate(e.target.value)} value={htmltemplate}/>
                 <button className='my-10 flex bg-blue-500 justify-center h-8 items-center text-white rounded-xl' onClick={handlesend}>{loader?<Loader/>:"Send"}</button>
-                {/* <div><MyComponent sethtmltemplate={sethtmltemplate} htmltemplate={htmltemplate} /></div> */}
-                {/* <button className='mt-20 flex justify-center bg-blue-500 text-white rounded-xl mx-80 h-8 items-center cursor-pointer text-lg' onClick={handlesend}>{loader?<Loader/>:"Send"}</button> */}
             </div>
         </div>
-        {/* <div>
-    </div> */}
+     
     </>
 }
 
