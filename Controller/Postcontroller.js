@@ -149,9 +149,11 @@ const postexcelfile = async(req,res) => {
      let month = req.body.newEvent.month
      let receiver = req.body.newEvent.receiver
      let content = req.body.newEvent.content
+     let id = req.body.newEvent.owner
+     
 
-     if (minute && subject && content && receiver && month && day && hour) {
-      await schedulemodal.create({ minute, title: subject, content, receiver, month, day, hour })
+     if (minute && subject && content && receiver && month && day && hour && id) {
+      await schedulemodal.create({ minute, title: subject, content, receiver, month, day, hour,owner:id})
       let datas = await schedulemodal.find()
       datas.forEach(data => {
         cron.schedule(
@@ -210,8 +212,9 @@ const postexcelfile = async(req,res) => {
 }
 
 const getallscheduled = async (req, res) => {
-    try {
-        let data = await schedulemodal.find()
+  try {
+        let id=req.params.id
+        let data = await schedulemodal.find({owner:id})
         res.json(data)
     } catch (error) {
         res.status(500).send({

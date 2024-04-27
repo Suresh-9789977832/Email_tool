@@ -10,7 +10,7 @@ postrouter.post('/postfile/:token', postexcelfile)
 
 postrouter.post('/schdeule', scheduleemail)
 
-postrouter.get('/getschedule',getallscheduled)
+postrouter.get('/getschedule/:id',getallscheduled)
 
 
 
