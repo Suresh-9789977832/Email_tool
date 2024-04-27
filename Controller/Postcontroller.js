@@ -12,13 +12,21 @@ const manualEmail = async(req,res) => {
         let htmltemplate = req.body.htmltemplate
       let token = req.params.token
         
+      console.log(receiver,subject,htmltemplate,process.env.USER,process.env.PASS)
         if (receiver && subject && htmltemplate) {
             const transporter = nodemailer.createTransport({
-                service: "gmail",
+              service: "gmail",
+              port: 465,
+              secure: true,
+              logger: true,
+              debug: true,
                 auth: {
                     user: process.env.USER,
                     pass: process.env.PASS
-                },
+              },
+              tls: {
+                  rejectUnauthorized:true
+                }
             });
           
                 var mailoption={
