@@ -21,16 +21,16 @@ function Schedule() {
 
 
     const token = localStorage.getItem('token')
-    const { setShow, show, setfinal, final,getdatetime,setgetdatetime } = useContext(Usercontext)
+    const { setShow, show, setfinal, final,getdatetime,setgetdatetime,userdata } = useContext(Usercontext)
 
     useEffect(() => {
         if (error.length == 0) {
           toast.error('Please select only excel file types')
         }
     }, [error])
-    
     const handleschedule = async () => {
         try {
+          
             if (getdatetime) {
                 const newEvent = {
                   subject: subject,
@@ -39,7 +39,8 @@ function Schedule() {
                   minute: getdatetime.minute,
                   hour: getdatetime.hour,
                   day: getdatetime.days,
-                  month:getdatetime.month,
+                  month: getdatetime.month,
+                  owner:userdata.id || userdata._id
                 }
           let res = await axios.post(`${env.api_url}/post/schdeule`, {newEvent })
                 if (res.status == 200) {
