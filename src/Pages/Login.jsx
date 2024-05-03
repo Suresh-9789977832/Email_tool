@@ -59,7 +59,7 @@ function Login() {
 
   return <>
 
-    <div className=' flex items-center pt-24 flex-col bg-slate-200 h-screen max-3md:pt-10'>
+    <div className=' flex items-center pt-12 flex-col bg-slate-200 h-screen max-3md:pt-10'>
     <h1 className='flex justify-center mb-5 text-2xl font-semibold text-gray-600 '>Login</h1>
  
       <div className=' h_w grid grid-cols-2 shadow-2xl max-3md:grid-cols-none'>
