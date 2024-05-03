@@ -82,6 +82,11 @@ function Login() {
           <button className='bg-darkblue text-white rounded-md py-1 flex justify-center' onClick={handlelogin}>{loader?<Loader/>:"Login"}</button>
           <p className='border-blue-300 text-darkblue underline cursor-pointer'>Forgot password?</p>
 
+          <div>
+            <span>Demo Email:</span><span> Suresh@gmail.com</span><br/>
+            <span>Demo password:</span><span> Suresh</span>
+          </div>
+
           <span>You don't have an Account? <Link to={'/signup'} className='text-darkblue underline cursor-pointer'>Signup</Link></span>
         </div>
       </div>
