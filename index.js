@@ -16,7 +16,10 @@ app.use(express.json())
 app.use('/user', userRouter)
 app.use('/post', postrouter)
 
-
+app.use(cors({
+    origin: "https://beautiful-sawine-adc5c8.netlify.app",
+    credentials:true
+}))
 
 // Array of email data
 // let data =  schedulemodal.find()
